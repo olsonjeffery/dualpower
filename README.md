@@ -38,7 +38,13 @@ Run `sudo mkdir /.snapshots` and then `pacman -S snap-pac` again and it should c
 
 ```bash
 # Base system install up through desktop
-sudo pacman -Syu --needed base-devel git gum niri xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty networkmanager ghostty sddm plymouth swayidle swaylock docker docker-compose docker-buildx paru
+sudo pacman -Syu --needed base-devel git gum niri xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty networkmanager ghostty sddm plymouth swayidle swaylock docker docker-compose docker-buildx paru rustup
+
+# rustup setup/init
+rustup default stable
+
+# install jj
+cargo install --locked --bin jj jj-cli
 
 # edit /etc/group and add your user to the docker group
 # then do
@@ -110,10 +116,12 @@ sudo reboot
 - Wayland, [Niri][5], and [noctalia-shell][4] make up the core user experience
   - Niri keybinds are slightly customized from Niri defaults and integrate with
   noctalia-shell actions
+  - A `gruvbox` style theme is used, but swapping out the yellows/greens for reds
+  and oranges for blues
 - [Kanshi][3] is installed and running via Niri
   - It is inert by default; you will need to provide your own `~/.config/kanshi/config`
   based on your monitor setup(s)
-- [NeoVim] & [LaziVim] with some additional tweaks for the author's preferred workflow
+- [NeoVim][6] & [LazyVim][7] with some additional tweaks for the author's preferred workflow
   - rainbow brackets
   - autosave upon exiting insert mode, window/buffer change, etc
 
@@ -128,3 +136,5 @@ sudo reboot
 [3]: https://wiki.archlinux.org/title/Kanshi
 [4]: https://docs.noctalia.dev/docs/
 [5]: https://yalter.github.io/niri/
+[6]: https://neovim.io/
+[7]: https://www.lazyvim.org/

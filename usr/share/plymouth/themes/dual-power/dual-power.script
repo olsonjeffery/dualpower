@@ -1,4 +1,5 @@
-# Dual Power Plymouth Theme Script
+# Dual Power Plymouth Theme Script; taken directly
+# from Omarchy's plymouth themeing
 
 Window.SetBackgroundTopColor(0.101, 0.105, 0.149);
 Window.SetBackgroundBottomColor(0.101, 0.105,  0.149);
