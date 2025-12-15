@@ -1,6 +1,6 @@
-<div style="text-align:center;">
+<p align="center">
   <img src="logo.png" alt="Dual Power logo" />
-</div>
+</p>
 
 Dual Power is an out-of-the-box setup for Arch/EndevourOS Linux. It is meant to be
 deployed over a fresh install of the Linux distro. It's
