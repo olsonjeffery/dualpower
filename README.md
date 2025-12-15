@@ -25,111 +25,64 @@ Currently this is a manual install process, outlined below.
 
 Start with installing vanilla Arch Linux or EndevourOS (with no desktop).
 
-#### EndevourOS
+### Pre-Install: EndevourOS
 
 Follow [this guide][1] for limine/snapper setup on a fresh EndevousOS install. Be sure
-to select `btfs` and drive encryption. Choose "No Desktop" install option.
+to select `btrfs` and drive encryption. Choose "No Desktop" install option.
 
 At one point in the guide you will delete the `/.snapshots` directory. When completing the guide, you will install `snap-pac`; This step will fail without that folder.
 
 Run `sudo mkdir /.snapshots` and then `pacman -S snap-pac` again and it should complete without error.
 
-#### Dual Power Install
+### Dual Power Install
 
-```bash
-# Base system install up through desktop
-sudo pacman -Syu --needed base-devel git gum niri xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty networkmanager ghostty sddm plymouth swayidle swaylock docker docker-compose docker-buildx paru rustup
+1. Run the `install.sh` script
+1. edit `/etc/kernel/cmdline` and append "quiet splash" to the end
+1. It is recommended to install a non-vanilla kernel; We like `linux-lqx`
+    - edit `/etc/makepkg.conf`, find the `MAKEFLAGS` variable and change it to `MAKEFLAGS="-j$(nproc)"`
+    - `sudo pacman -Syu linux-lqx`
 
-# rustup setup/init
-rustup default stable
+## What Dual Power Is
 
-# install jj
-cargo install --locked --bin jj jj-cli
+### Behavior/Workflow
 
-# edit /etc/group and add your user to the docker group
-# then do
-sudo usermod -a -G docker $USER
-
-paru -Sy matugen-git wl-clipboard cliphist cava qt6-multimedia-ffmpeg xwayland-satellite-git librewolf-bin
-paru -Sy wlsunset python3 evolution-data-server pacsea-bin dropbox neofetch
-
-paru -Sy quickshell gpu-screen-recorder brightnessctl ddcutil noctalia-shell polkit-kde-agent
-
-mkdir -p ~/.config/quickshell/noctalia-shell
-curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz | tar -xz --strip-components=1 -C ~/.config/quickshell/noctalia-shell
-cp -Rf config/noctalia ~/.config
-
-sudo mkdir -p /etc/sddm.conf.d && sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
-
-# Noctalia enable
-mkdir -p ~/.config/systemd/user && cp ./config/systemd/user/noctalia.service ~/.config/systemd/user/noctalia.service
-
-chmod +x ./bin/*sh
-sudo ./bin/default-keyring.sh
-sudo ./bin/sddm.sh
-
-# plymouth boot splash
-sudo cp -Rf ./usr/share/plymouth/themes/dual-power /usr/share/plymouth/themes/dual-power
-sudo plymouth-set-default-theme dual-power
-# add plymouth to dracut setup
-sudo tee /etc/dracut.conf.d/myflags.conf <<EOF >/dev/null
-add_dracutmodules+=" plymouth "
-EOF
-
-# edit /etc/kernel/cmdline and append "quiet splash" to the end
-
-# edit /etc/makepkg.conf
-# change MAKEFLAGS line to read:
-# MAKEFLAGS="-j$(nproc)"
-
-#  Install kernel
-sudo pacman -Syu linux-lqx
-
-# setup nvim
-git clone --depth=1 https://github.com/omacom-io/omarchy-pkgs
-cd omarchy-pkgs/pkgbuilds/omarchy-nvim
-makepkg -si
-omarchy-nvim-setup
-cd ../../../
-rm -Rf omarchy-pkgs
-
-# instlall onmybash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-
-# Install local config
-cp -Rf ./config/* ~/.config/
-
-# Install application desktop files
-mkdir -p ~/.local/share
-cp -Rf ./local/share/applications ~/.local/share
-
-# let us enable some systemd services, both global and user
-sudo systemctl enable --now NetworkManager.service
-sudo systemctl enable docker.service --now
-systemctl --user enable noctalia.service
-
-sudo reboot
-```
+- As in O******, Dual Power relies upon disk encryption + autologin via `sddm`
+for security
+- noctalia-shell provides most of the "desktop" experience; it can be customized
+to your liking; is not particularly keyboard-driven
+- We rely upon `pacsea` for package management/updates; no auto-update runner is
+provided, but `pacsea` has everything you need; It has a provided `.desktop`
+shortcut and can be launched/ran directly without opening a terminal
 
 ### The Software Suite
 
 - Wayland, [Niri][5], and [noctalia-shell][4] make up the core user experience
   - Niri keybinds are slightly customized from Niri defaults and integrate with
-  noctalia-shell actions
+      noctalia-shell actions
   - A `gruvbox` style theme is used, but swapping out the yellows/greens for reds
-  and oranges for blues
+      and oranges for blues
+  - `xwayland-satellite-git` from AUR is installed by default and Niri knows how
+    to use it, so X programs should Just Work
 - [Kanshi][3] is installed and running via Niri
   - It is inert by default; you will need to provide your own `~/.config/kanshi/config`
-  based on your monitor setup(s)
-- [NeoVim][6] & [LazyVim][7] with some additional tweaks for the author's preferred workflow
-  - rainbow brackets
+    based on your monitor setup(s)
+- [NeoVim][6] & [LazyVim][7]
+  - Has some additional tweaks for the author's preferred workflow
+  - Rainbow brackets
+  - lazygit nvim integration
   - autosave upon exiting insert mode, window/buffer change, etc
+- [LibreWolf][8] is the default web browser (Shortcut: `Mod+Shift+B`)
+  - FIXME Add LibreWolf config/profiles into install
+  - It is configured, when launched, to start the Profile Manager dialog
+  - Two profiles are installed and configured by default: `persistent` & `scratch`
+  - `persistent` is a profile that preserves cookies, history, etc across browser restarts; All previous tabs are restored upon startup
+  - `scratch` does not preserve cookies, history, etc across browser restarts; All previous tabs are restored upon startup
 
-### Links
+### Post-Install concerns
 
-- Niri + Noctalia
-  - <https://yalter.github.io/niri/Getting-Started.html>
-  - <https://github.com/noctalia-dev/noctalia-shell>
+#### GPU/Graphics
+
+- If you have an AMD GPU, you will want to look into installing your drivers: `vulkan-radeon`, etc; probably should install Steam or w/e as well to test that it's working
 
 [1]: https://forum.endeavouros.com/t/guide-how-to-install-and-configure-endeavouros-for-bootable-btrfs-snapshots-using-limine-and-limine-snapper-sync/69742
 [2]: https://github.com/basecamp/Omarchy
@@ -138,3 +91,4 @@ sudo reboot
 [5]: https://yalter.github.io/niri/
 [6]: https://neovim.io/
 [7]: https://www.lazyvim.org/
+[8]: https://librewolf.net/
