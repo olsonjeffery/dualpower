@@ -2,22 +2,25 @@
   <img src="logo.png" alt="Dual Power logo" />
 </p>
 
-Dual Power is an out-of-the-box setup for Arch/EndevourOS Linux. It is meant to be
-deployed over a fresh install of the Linux distro. It's
+> ⚠️ The Dual Power project is in a PRE-ALPHA state; It provides zero guarantee of
+> stability or correctness. You have been warned.
+
+Dual Power is an out-of-the-box setup for Arch/EndevourOS Linux. It is meant to
+be deployed over a fresh install of the Linux distro. It's
 original inspiration was liberated from the [O****** project][2].
 Like O******, Dual Power is developer focused. It uses a different
 collection of software to make up it's base, although it borrows
 a few components (like its LazyVim setup).
 
-It should be noted that this repository/project is NOT meant to
-compete with O****** (at least not on its own terms). It's merely
-yet another meta-distro, "pre-riced for a certain setup", but without
-a focus on built-in configurability for the defaults. So, if your immediately
-reaction to any of the software, aesthetic, configuration, or other choices
-made is negative, then we do apologize. Dual Power may not be the one for you.
-The author is not interested in configurable defaults for desktop, term,
-shell/bar/finder, DE, etc. You can install/configure/integrate those
-yourself. Otherwise, please have Fun!
+This project is yet another meta-distro, "pre-riced for a certain setup", but without
+a focus on built-in configurability for the defaults. So, if your immediate
+reaction to any of the software, aesthetic, configuration, etc choices is negative,
+then we do apologize. Dual Power may not be the one for you.
+Configurable defaults for desktop, term, shell/bar/finder, DE, etc aren't a priority.
+You can install/configure/integrate those yourself. Otherwise, please have Fun!
+
+This project's assets are released under the terms of the MIT License. See `LICENSE` for
+details.
 
 ## Install playbook
 
@@ -27,16 +30,20 @@ Start with installing vanilla Arch Linux or EndevourOS (with no desktop).
 
 ### Pre-Install: EndevourOS
 
-Follow [this guide][1] for limine/snapper setup on a fresh EndevousOS install. Be sure
-to select `btrfs` and drive encryption. Choose "No Desktop" install option.
+Follow [this guide][1] for limine/snapper setup on a fresh EndevousOS install.
+Be sure to select `btrfs` and drive encryption. Choose "No Desktop" install option.
+This guide probably (mostly, untested) works for vanilla Arch as well.
 
-At one point in the guide you will delete the `/.snapshots` directory. When completing the guide, you will install `snap-pac`; This step will fail without that folder.
+At one point in the guide you will delete the `/.snapshots` directory.
+When completing the guide, you will install `snap-pac`; This step will fail
+without that folder.
 
-Run `sudo mkdir /.snapshots` and then `pacman -S snap-pac` again and it should complete without error.
+Run `sudo mkdir /.snapshots` and then `pacman -S snap-pac` again and it should
+complete without error.
 
 ### Dual Power Install
 
-1. Run the `install.sh` script
+1. Run the `./install.sh` script
 1. edit `/etc/kernel/cmdline` and append "quiet splash" to the end
 1. It is recommended to install a non-vanilla kernel; We like `linux-lqx`
     - edit `/etc/makepkg.conf`, find the `MAKEFLAGS` variable and change it to `MAKEFLAGS="-j$(nproc)"`
