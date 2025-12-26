@@ -9,6 +9,9 @@
     "states": {
         "privacy-indicator": {
             "enabled": true
+        },
+        "update-count": {
+            "enabled": true
         }
     },
     "version": 1

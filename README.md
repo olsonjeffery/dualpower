@@ -65,11 +65,12 @@ shortcut and can be launched/ran directly without opening a terminal
 
 - Wayland, [Niri][5], and [noctalia-shell][4] make up the core user experience
   - Niri keybinds are slightly customized from Niri defaults and integrate with
-      noctalia-shell actions
+      noctalia-shell actions; show keybinds with `Mod+Shift+/`
   - A `gruvbox` style theme is used, but swapping out the yellows/greens for reds
-      and oranges for blues
+  & blues, yellow/green kept in places
   - `xwayland-satellite-git` from AUR is installed by default and Niri knows how
     to use it, so X programs should Just Work
+- [alacritty][1] is the default terminal
 - [Kanshi][3] is installed and running via Niri
   - It is inert by default; you will need to provide your own `~/.config/kanshi/config`
     based on your monitor setup(s)
