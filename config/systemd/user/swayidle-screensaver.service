@@ -1,0 +1,8 @@
+[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/swayidle -w timeout 121 'dualpower-launch-screensaver' timeout 600 'qs -c noctalia-shell ipc call sessionMenu lockAndSuspend' timeout 605 'niri msg action power-off-monitors' before-sleep 'qs -c noctalia-shell ipc call sessionMenu lockAndSuspend'
+Restart=on-failure

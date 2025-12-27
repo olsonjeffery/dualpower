@@ -9,17 +9,21 @@ rustup default stable
 sudo usermod -a -G docker $USER
 
 # FIXME add AUR packages file
-paru -Sy matugen-git wl-clipboard cliphist cava qt6-multimedia-ffmpeg xwayland-satellite-git librewolf-bin wlsunset python3 evolution-data-server pacsea-bin dropbox neofetch quickshell gpu-screen-recorder brightnessctl ddcutil noctalia-shell polkit-kde-agent
+paru -Sy matugen-git wl-clipboard cliphist cava qt6-multimedia-ffmpeg xwayland-satellite-git librewolf-bin wlsunset python3 evolution-data-server pacsea-bin dropbox neofetch quickshell gpu-screen-recorder brightnessctl ddcutil noctalia-shell polkit-kde-agent python-terminaltexteffects
 
 mkdir -p ~/.config/quickshell/noctalia-shell
 curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz | tar -xz --strip-components=1 -C ~/.config/quickshell/noctalia-shell
 
 sudo mkdir -p /etc/sddm.conf.d && sudo cp ./etc/sddm.conf.d/autologin.conf /etc/sddm.conf.d/autologin.conf
 
-# Noctalia systemd service
-mkdir -p ~/.config/systemd/user && cp ./config/systemd/user/noctalia.service ~/.config/systemd/user/noctalia.service
+# setup home bin dir
+chmod +x ./bin/*
+echo PATH=\$PATH:/home/$USER/bin >> ~/.bash_profile
+cp -Rf ./bin ~/
 
-chmod +x ./bin/*sh
+# systemd services
+mkdir -p ~/.config/systemd/user && cp ./config/systemd/user/* ~/.config/systemd/user/
+
 sudo ./bin/default-keyring.sh
 sudo ./bin/sddm.sh
 
@@ -38,6 +42,10 @@ omarchy-nvim-setup
 cd ../../../
 rm -Rf omarchy-pkgs
 
+# setup screensaver
+mkdir -p ~/.config/dualpower
+cp ./logo* ~/.config/dualpower
+
 # instlall ohmybash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
@@ -51,6 +59,8 @@ cp -Rf ./local/share/applications ~/.local/share
 # let us enable some systemd services, both global and user
 sudo systemctl enable --now NetworkManager.service
 sudo systemctl enable docker.service --now
+systemctl --user daemon-reload
 systemctl --user enable noctalia.service
+systemctl --user add-wants niri.service swayidle-screensaver.service
 
-sudo reboot
+#sudo reboot

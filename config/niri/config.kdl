@@ -288,6 +288,10 @@ window-rule {
     default-column-width {}
 }
 
+cursor {
+  hide-after-inactive-ms 1000
+}
+
 // Open the liberewold picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
