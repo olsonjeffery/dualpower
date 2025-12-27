@@ -2,15 +2,15 @@
   <img src="logo.png" alt="Dual Power logo" />
 </p>
 
-> ⚠️ The Dual Power project is in a PRE-ALPHA state; It provides zero guarantee of
-> stability or correctness. You have been warned.
+> ⚠️ The Dual Power project is in a PRE-ALPHA state; It provides zero guarantee
+> of stability or correctness. You have been warned.
 
 Dual Power is an out-of-the-box setup for Arch/EndevourOS Linux. It is meant to
 be deployed over a fresh install of the Linux distro. It's
 original inspiration was liberated from the [O****** project][2].
 Like O******, Dual Power is developer focused. It uses a different
 collection of software to make up it's base, although it borrows
-a few components (like its LazyVim setup).
+a few components (like its LazyVim setup, screensaver scheme, etc).
 
 This project is yet another meta-distro, "pre-riced for a certain setup", but without
 a focus on built-in configurability for the defaults. So, if your immediate
@@ -19,8 +19,16 @@ then we do apologize. Dual Power may not be the one for you.
 Configurable defaults for desktop, term, shell/bar/finder, DE, etc aren't a priority.
 You can install/configure/integrate those yourself. Otherwise, please have Fun!
 
-This project's assets are released under the terms of the MIT License. See `LICENSE` for
-details.
+The name _Dual Power_ derives from a [historical power-sharing arrangement][9] that
+arose in in Russia, circa 1917. Governance was jointly exercised by both the
+Provisional Government and Petrograd Soviet, after the abdication of Tsar Nicholas
+and the resulting February Revolution. The name is [lampshading][10] the overlapping
+and unclear boundaries between the underlying distribution (Arch/EndevourOS) and
+the Dual Power meta-distro itself. Dual Power maintains no self-hosted package/AUR
+repositories and is purely parasitic on the underlying Arch/EndevousOS Linux distributions.
+
+Insofar as this project has liberated several script assets from O******, it is
+released under the terms of the MIT License. See `LICENSE` for details.
 
 ## Install playbook
 
@@ -65,9 +73,10 @@ shortcut and can be launched/ran directly without opening a terminal
 
 - Wayland, [Niri][5], and [noctalia-shell][4] make up the core user experience
   - Niri keybinds are slightly customized from Niri defaults and integrate with
-      noctalia-shell actions; show keybinds with `Mod+Shift+/`
+    noctalia-shell actions; show keybinds with `Mod+Shift+/`
   - A `gruvbox` style theme is used, but swapping out the yellows/greens for reds
-  & blues, yellow/green kept in places
+    & blues, yellow/green kept in places; the default `grubbox` themes are used
+    elsewhere
   - `xwayland-satellite-git` from AUR is installed by default and Niri knows how
     to use it, so X programs should Just Work
 - [alacritty][1] is the default terminal
@@ -100,3 +109,5 @@ shortcut and can be launched/ran directly without opening a terminal
 [6]: https://neovim.io/
 [7]: https://www.lazyvim.org/
 [8]: https://librewolf.net/
+[9]: https://en.wikipedia.org/wiki/Dual_power
+[10]: https://tvtropes.org/pmwiki/pmwiki.php/Main/LampshadeHanging
