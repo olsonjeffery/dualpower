@@ -12,23 +12,24 @@ Like O******, Dual Power is developer focused. It uses a different
 collection of software to make up it's base, although it borrows
 a few components (like its LazyVim setup, screensaver scheme, etc).
 
-This project is yet another meta-distro, "pre-riced for a certain setup", but without
-a focus on built-in configurability for the defaults. So, if your immediate
-reaction to any of the software, aesthetic, configuration, etc choices is negative,
-then we do apologize. Dual Power may not be the one for you.
-Configurable defaults for desktop, term, shell/bar/finder, DE, etc aren't a priority.
-You can install/configure/integrate those yourself. Otherwise, please have Fun!
-
 The name _Dual Power_ derives from a [historical power-sharing arrangement][9] that
 arose in in Russia, circa 1917. Governance was jointly exercised by both the
 Provisional Government and Petrograd Soviet, after the abdication of Tsar Nicholas
 and the resulting February Revolution. The name is [lampshading][10] the overlapping
-and unclear boundaries between the underlying distribution (Arch/EndevourOS) and
+and unclear boundaries between the underlying distributions (Arch/EndevourOS) and
 the Dual Power meta-distro itself. Dual Power maintains no self-hosted package/AUR
-repositories and is purely parasitic on the underlying Arch/EndevousOS Linux distributions.
+repositories and is purely parasitic on the underlying Arch/EndevousOS Linux
+distributions, as well as continuing to utilize some O****** script infra.
 
-Insofar as this project has liberated several script assets from O******, it is
-released under the terms of the MIT License. See `LICENSE` for details.
+This project is yet another meta-distro, "pre-riced for a certain setup", but without
+a focus on built-in configurability for the defaults. So, if your immediate
+reaction to any of the software, aesthetic, configuration, etc choices is negative,
+then we do apologize. Dual Power may not be the one for you.
+Configurable defaults for desktop, term, shell/bar/finder, etc aren't a priority.
+You can install/configure/integrate those yourself. Otherwise, please have Fun!
+
+Insofar as this project has copied/modified several script assets from O******,
+it is released under the terms of the MIT License. See `LICENSE` for details.
 
 ## Install playbook
 
@@ -73,16 +74,17 @@ shortcut and can be launched/ran directly without opening a terminal
 
 - Wayland, [Niri][5], and [noctalia-shell][4] make up the core user experience
   - Niri keybinds are slightly customized from Niri defaults and integrate with
-    noctalia-shell actions; show keybinds with `Mod+Shift+/`
+  noctalia-shell actions; show keybinds with `Mod+Shift+/`
   - A `gruvbox` style theme is used, but swapping out the yellows/greens for reds
-    & blues, yellow/green kept in places; the default `grubbox` themes are used
-    elsewhere
+  & blues, yellow/green kept in places; the default `grubbox` themes are used
+  elsewhere
   - `xwayland-satellite-git` from AUR is installed by default and Niri knows how
-    to use it, so X programs should Just Work
+  to use it, so X programs should Just Work
 - [alacritty][1] is the default terminal
-- [Kanshi][3] is installed and running via Niri
+- [Kanshi][3] is installed and running via Niri; it is a program for modelling
+"profiles" that represent various monitor-related setups
   - It is inert by default; you will need to provide your own `~/.config/kanshi/config`
-    based on your monitor setup(s)
+  based on your display setup(s)
 - [NeoVim][6] & [LazyVim][7]
   - Has some additional tweaks for the author's preferred workflow
   - Rainbow brackets
@@ -92,14 +94,19 @@ shortcut and can be launched/ran directly without opening a terminal
   - FIXME Add LibreWolf config/profiles into install
   - It is configured, when launched, to start the Profile Manager dialog
   - Two profiles are installed and configured by default: `persistent` & `scratch`
-  - `persistent` is a profile that preserves cookies, history, etc across browser restarts; All previous tabs are restored upon startup
-  - `scratch` does not preserve cookies, history, etc across browser restarts; All previous tabs are restored upon startup
+  - UNIMPLEMENTED: `persistent` is a profile that preserves cookies, history,
+  etc across browser
+  restarts; All previous tabs are restored upon startup
+  - UNIMPLEMENTED: `scratch` does not preserve cookies, history, etc across browser
+  restarts; All previous tabs are restored upon startup
 
 ### Post-Install concerns
 
 #### GPU/Graphics
 
-- If you have an AMD GPU, you will want to look into installing your drivers: `vulkan-radeon`, etc; probably should install Steam or w/e as well to test that it's working
+- If you have an AMD GPU, you will want to look into installing your drivers:
+`vulkan-radeon`, etc; probably should install Steam or w/e as well to test
+that it's working
 
 [1]: https://forum.endeavouros.com/t/guide-how-to-install-and-configure-endeavouros-for-bootable-btrfs-snapshots-using-limine-and-limine-snapper-sync/69742
 [2]: https://github.com/basecamp/Omarchy
